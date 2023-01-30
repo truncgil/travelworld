@@ -55,7 +55,7 @@
 	</style>
 </head>
 
-<body onmousedown="return false" onselectstart="return false">
+<body >
 
 
         <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -176,7 +176,7 @@
                                             <!-- /Dropdown Link -->
 											<?php } } ?>
                                         </ul>
-										<form method="GET" action="ara" class="form-inline">
+										<form method="GET" action="ara" class="form-inline d-none">
 											<div class="w-auto h-auto m-0-auto">
 												<input style="float: left;" name="q" id="searchInput" class="form-control m-0-auto m-md-unset" type="search" placeholder="Ara..." aria-label="Search" data-visible="false">
 												<button id="searchButton" type="submit" class="search-button">

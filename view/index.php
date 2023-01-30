@@ -80,7 +80,7 @@
 		<?php } ?>
 
 		<div class="ppb_wrapper  ">
-			<div class="one pp_tour_search">
+			<div class="one pp_tour_search d-none">
 				<div class="page_content_wrapper">
 					<form id="tour_search_form" name="tour_search_form" method="get"
 						action="ara">
