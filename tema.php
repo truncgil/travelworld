@@ -34,7 +34,9 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/truncgil.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/animate.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/custom.css">
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+	 <!--<script type="text/javascript" src="assets/js/jquery.js"></script> -->
 	<script type="text/javascript" src="assets/js/jquery-migrate.min.js"></script>
 	
 	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
@@ -132,8 +134,8 @@
 														$link = $m['slug'];
 													}
 												?>
-                                                <a href="http://turia.com.tr/router.php?id=arac-kiralama" class="nav-link" <?php if($alt!=0) { ?>id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
-                                                 <?php e($m['title']) ?><?php if($alt!=0) { ?><i class="fa fa-chevron-down mleft-5"></i> <?php } ?> 
+                                                <a href="http://turia.com.tr/router.php?id=arac-kiralama" class="nav-link" <?php if(! isMobile()) { if($alt!=0) { ?>id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+                                                 <?php e($m['title']) ?><?php if($alt!=0) { ?><i class="fa fa-chevron-down mleft-5"></i> <?php } } ?> 
                                                 </a>
 												<?php if($alt!=0 && $m['slug'] != 'hac-umre') { ?>
 														<div class="dropdown-menu" aria-labelledby="navbarDropdown1">

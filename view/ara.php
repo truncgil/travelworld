@@ -20,7 +20,7 @@
                     <a href="./">Anasayfa</a> / 
                     <span class="current"><?php e(get("q")) ?> </span>
 			</div>
-			<div class="one pp_tour_search">
+			<div class="one pp_tour_search"> 
 				<div class="page_content_wrapper">
 					<form id="tour_search_form" name="tour_search_form" method="get"
 						action="ara">
