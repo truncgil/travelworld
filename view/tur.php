@@ -36,24 +36,9 @@
 							<?php if(getisset("payment")) {
 								include("paytr.php");
 							} else  { 
-							  ?>
- 							<form action="?payment" method="post">
- 									<h2>Online Rezervasyon</h2>
- 									Doğum Tarihi
- 									<input type="date" name="dog_tar" class="form-control" required id="">
- 									İsim
- 									<input type="text" name="adi" class="form-control" required id="">
- 									Soyadı
- 									<input type="text" name="soyadi" class="form-control" required id="">
- 									TC Kimlik No:
- 									<input type="number" minlength="11" maxlength="11" name="tckimlik" class="form-control" required id="">
- 									Telefon
- 									<input type="number" name="telefon" class="form-control" required id="">
- 									
- 									<button class="btn btn-primary mt-5">Ödeme Adımına Geç</button>
- 
- 							</form> 
-							 <?php } ?>
+								
+								include("online-rezervasyon-formu.php");
+							  } ?>
 						</div>
 					</div>
 					<div class="sidebar_content full_width">
