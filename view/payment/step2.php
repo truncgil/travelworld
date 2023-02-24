@@ -37,7 +37,7 @@
      <?php for($k=1;$k<=post("cocuk");$k++) {
           ?>
           <div class="kimlik">
-            <h2><?php e($k) ?>. 6-15 Yaş Kimlik Bilgileri</h2>
+            <h2><?php e($k) ?>. <?php e(yasConverter($type)) ?> Kimlik Bilgileri</h2>
             <div class="row">
                 <?php include("form.php") ?>
             </div>
@@ -54,7 +54,7 @@
      <?php for($k=1;$k<=post("bebek");$k++) {
           ?>
           <div class="kimlik">
-            <h2><?php e($k) ?>. 0-6 Yaş Kimlik Bilgileri</h2>
+            <h2><?php e($k) ?>. <?php e(yasConverter($type)) ?> Kimlik Bilgileri</h2>
             <div class="row">
                 <?php include("form.php") ?>
             </div>

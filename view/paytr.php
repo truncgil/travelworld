@@ -18,7 +18,7 @@
 //    $payment_amount = (int) $c['fiyat'] * 100; //9.99 için 9.99 * 100 = 999 gönderilmelidir.
     #
     ## Sipariş numarası: Her işlemde benzersiz olmalıdır!! Bu bilgi bildirim sayfanıza yapılacak bildirimde geri gönderilir.
-    $merchant_oid = rand();
+  //  $merchant_oid = rand();
     #
     ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
     $user_name = post("adi") . " " . post("soyadi");
@@ -40,17 +40,9 @@
     $merchant_fail_url = "http://www.gezidunyasi.com.tr/{$c['slug']}?error";
     #
     ## Müşterinin sepet/sipariş içeriği
-<<<<<<< HEAD
     
 
     $user_basket = base64_encode(json_encode($user_basket));
-=======
-    $user_basket = "";
-
-    $user_basket = base64_encode(json_encode(array(
-        array($c['title'], $c['fiyat'], 1), // 1. ürün (Ürün Ad - Birim Fiyat - Adet )
-    )));
->>>>>>> 64d35e4c04330af3d4b8c22766dbcac3d3a5d561
     #
     /* ÖRNEK $user_basket oluşturma - Ürün adedine göre array'leri çoğaltabilirsiniz
     $user_basket = base64_encode(json_encode(array(

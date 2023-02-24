@@ -32,7 +32,7 @@ $toplam += $ara_toplam;
 										$toplam += $ara_toplam;
 									  ?>
  									<tr>
- 										<td><?php echo post("cocuk") ?> x 6-15 Yaş (<?php e(para($t['fiyat2'])) ?>)</td>
+ 										<td><?php echo post("cocuk") ?> x <?php e(yasConverter("cocuk")) ?> (<?php e(para($t['fiyat2'])) ?>)</td>
  										<td><?php e(para($ara_toplam)) ?></td>
  									</tr>  
 									 <?php } ?>
@@ -41,7 +41,7 @@ $toplam += $ara_toplam;
 										$toplam += $ara_toplam;
 									   ?>
  									<tr>
- 										<td><?php echo post("bebek") ?> x 0-6 Yaş (<?php e(para($t['fiyat3'])) ?>)</td>
+ 										<td><?php echo post("bebek") ?> x <?php e(yasConverter("bebek")) ?> (<?php e(para($t['fiyat3'])) ?>)</td>
  										<td><?php e(para($ara_toplam)) ?></td>
  									</tr>  
 									  <?php } ?>
@@ -51,8 +51,10 @@ $toplam += $ara_toplam;
 									</tr>
 									
 							 </table>
-										
-							<div class="btn btn-success btn-block odeme-yap" onclick="$('.send').trigger('click');">Ödeme Yap</div>
+								<?php if(getesit("step","2"))  { 
+								  ?>		
+ 							<div class="btn btn-success btn-block odeme-yap" onclick="$('.send').trigger('click');">Ödeme Yap</div> 
+								 <?php } ?>
 										
 							 <?php 
 						} ?>
@@ -69,11 +71,11 @@ $toplam += $ara_toplam;
 									<input type="number" name="yetiskin" required value="1" min="1" id="" class="form-control">
 								</div>
 								<div class="col-md-4">
-									<p>6-15 Yaş Çocuk Sayısı</p>
+									<p><?php e(yasConverter("cocuk")) ?> Sayısı</p>
 									<input type="number" name="cocuk" value="0" min="0" id="" class="form-control">
 								</div>
 								<div class="col-md-4">
-									<p>0-6 Yaş Çocuk Sayısı</p>
+									<p><?php e(yasConverter("bebek")) ?> Sayısı</p>
 									<input type="number" name="bebek" value="0" min="0" id="" class="form-control">
 								</div>
 								<div class="col-md-6">

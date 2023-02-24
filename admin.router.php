@@ -9,6 +9,86 @@ if(getisset("tablesil")) {
 } 
 $i = get("i");
 		switch($i) {
+			case "gelen-odemeler" : 
+				bbaslik("Gelen Ödemeler", "Gelen ödemeleri bu bölümden takip edebilirsiniz. ");
+				$bas = 0;
+				$miktar = 100;
+				$sorgu = ksorgu("odemeler","order by id desc limit $bas,$miktar");
+				 ?>
+				 <div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped">
+						<tr>
+							<th>Rezervasyon</th>
+							<th>Tarih</th>
+							<th>Ödemeyi Yapan</th>
+							<th>Detaylar</th>
+							<th>Tutar</th>
+							<th>İşlem</th>
+						</tr>
+						<?php while($s = kd($sorgu)) { 
+							$j = json_decode($s['html'], true);
+						   ?>
+							<tr>
+								<td><a href="<?php e($s['kid']) ?>" target="_blank"><?php e($s['kid']) ?></a></td>
+								<td><?php e(date("d.m.Y H:i:s", strtotime($s['date']))) ?></td>
+								<td><?php e($j['adi']) ?> <?php e($j['soyadi']) ?> <br>
+									<small><?php e($j['email']) ?> <br> <?php e($j['telefon']) ?> <br>
+										<?php e($j['adres']) ?>
+									</small>
+								</td>
+								<td>
+									<button data-toggle="collapse" data-target="#detaylar<?php e($s['id']) ?>">Rezervasyon Detayları</button>
+
+									<div id="detaylar<?php e($s['id']) ?>" class="collapse">
+										<div class="table-responsive">
+											<table class="table">
+												<tr>
+													<td>Yetişkin</td>
+													<td><?php e($j['yetiskin']) ?></td>
+												</tr>
+												<tr>
+													<td>Çocuk</td>
+													<td><?php e($j['cocuk']) ?></td>
+												</tr>
+												<tr>
+													<td>Bebek</td>
+													<td><?php e($j['bebek']) ?></td>
+												</tr>
+											</table>
+											<table class="table">
+												<tr>
+													<th>Adı Soyadı</th>
+													<th>Doğ. Tar.</th>
+													<th>TC Kimlik</th>
+												</tr>
+												<?php foreach(['yetiskin','cocuk','bebek'] AS $type)  { 
+												  ?>
+													<?php for($k=1;$k<=$j[$type];$k++)  { 
+														$type2 = yasConverter($type);
+ 														$key = $type . '_' . $k . '_';
+														?>
+														<tr>
+															<td><?php e($j[$key.'adi']) ?> <?php e($j[$key.'soyadi']) ?> <br>
+															<small><?php e($type2) ?></small>
+															</td>
+															<td><?php e($j[$key.'dog_tar']) ?></td>
+															<td><?php e($j[$key.'tckimlik']) ?></td>
+														</tr>  
+													<?php } ?>
+												 <?php } ?>
+											</table>
+										</div>
+									</div>
+								</td>
+								<td><?php e(para($s['fiyat'])) ?></td>
+								<td><?php e($s['datals']) ?></td>
+							</tr> 
+						 <?php } ?>
+					</table>
+				 </div>
+				 
+				 <?php 
+				break;
 			case "siparisler" :
 				bbaslik("Siparişler","Sitede Yer Alan Tüm Üyeler");
 				$siparis = ksorgu("content","where type='SİPARİŞ' GROUP BY style ORDER BY id DESC");
