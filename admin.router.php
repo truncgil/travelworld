@@ -9,6 +9,122 @@ if(getisset("tablesil")) {
 } 
 $i = get("i");
 		switch($i) {
+			case "gelen-odemeler" : 
+				bbaslik("Gelen Ödemeler", "Gelen ödemeleri bu bölümden takip edebilirsiniz. ");
+				$bas = 0;
+				$miktar = 100;
+				$filtre = "";
+				$where = [];
+			
+				if(!getesit("kid","")) {
+					$kid = veri(get("kid"));
+					$filtre .= " AND kid = $kid";
+				}
+				if(!getesit("d1","") && !getesit("d2","")) {
+					$d1 = veri(get("d1"));
+					$d2 = veri(get("d2"));
+					$filtre .= " AND (date>=$d1 AND date<=$d2)";
+				}
+				$sorgu = ksorgu("odemeler","WHERE id>0 $filtre order by id desc limit $bas,$miktar");
+				 ?>
+				 <?php col2("col-md-12") ?>
+				 <form action="" method="get">
+					<input type="hidden" name="i" value="gelen-odemeler">
+					<input type="hidden" name="filtre" value="ok">
+					Rezervasyon
+					<?php $rezervasyonlar = sorgu("SELECT kid FROM odemeler GROUP BY kid ORDER BY id DESC"); ?>
+					<select name="kid" id="" class="form-control select2">
+						<option value="">Seçiniz</option>
+						<?php while($r = kd($rezervasyonlar))  { 
+						  ?>
+ 						<option value="<?php e($r['kid']) ?>" <?php if(getesit("kid",$r['kid'])) e("selected"); ?>><?php e($r['kid']) ?></option> 
+						 <?php } ?>
+					</select>
+					Başlangıç Tarihi
+					<input type="date" name="d1" id="" value="<?php e(get("d1")) ?>" class="form-control">
+
+					Bitiş Tarihi
+					<input type="date" name="d2" id="" value="<?php e(get("d2")) ?>" class="form-control">
+								<br>
+					<button class="btn btn-primary">Sorgula</button>
+				 </form>
+				 <?php _col2() ?>
+				 <?php col2("col-md-12") ?>
+				 <div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped">
+						<tr>
+							<th>Rezervasyon</th>
+							<th>Tarih</th>
+							<th>Ödemeyi Yapan</th>
+							<th>Detaylar</th>
+							<th>Tutar</th>
+							<th>İşlem</th>
+						</tr>
+						<?php while($s = kd($sorgu)) { 
+							$j = json_decode($s['html'], true);
+						   ?>
+							<tr>
+								<td><a href="<?php e($s['kid']) ?>" target="_blank"><?php e($s['kid']) ?></a></td>
+								<td><?php e(date("d.m.Y H:i:s", strtotime($s['date']))) ?></td>
+								<td><?php e($j['adi']) ?> <?php e($j['soyadi']) ?> <br>
+									<small><?php e($j['email']) ?> <br> <?php e($j['telefon']) ?> <br>
+										<?php e($j['adres']) ?>
+									</small>
+								</td>
+								<td>
+									<button data-toggle="collapse" data-target="#detaylar<?php e($s['id']) ?>">Rezervasyon Detayları</button>
+
+									<div id="detaylar<?php e($s['id']) ?>" class="collapse">
+										<div class="table-responsive">
+											<table class="table">
+												<tr>
+													<td>Yetişkin</td>
+													<td><?php e($j['yetiskin']) ?></td>
+												</tr>
+												<tr>
+													<td>Çocuk</td>
+													<td><?php e($j['cocuk']) ?></td>
+												</tr>
+												<tr>
+													<td>Bebek</td>
+													<td><?php e($j['bebek']) ?></td>
+												</tr>
+											</table>
+											<table class="table">
+												<tr>
+													<th>Adı Soyadı</th>
+													<th>Doğ. Tar.</th>
+													<th>TC Kimlik</th>
+												</tr>
+												<?php foreach(['yetiskin','cocuk','bebek'] AS $type)  { 
+												  ?>
+													<?php for($k=1;$k<=$j[$type];$k++)  { 
+														$type2 = yasConverter($type);
+ 														$key = $type . '_' . $k . '_';
+														?>
+														<tr>
+															<td><?php e($j[$key.'adi']) ?> <?php e($j[$key.'soyadi']) ?> <br>
+															<small><?php e($type2) ?></small>
+															</td>
+															<td><?php e($j[$key.'dog_tar']) ?></td>
+															<td><?php e($j[$key.'tckimlik']) ?></td>
+														</tr>  
+													<?php } ?>
+												 <?php } ?>
+											</table>
+										</div>
+									</div>
+								</td>
+								<td><?php e(para($s['fiyat'])) ?></td>
+								<td><?php e($s['datals']) ?></td>
+							</tr> 
+						 <?php } ?>
+					</table>
+				 </div>
+				 <?php _col2() ?>
+				 
+				 <?php 
+				break;
 			case "siparisler" :
 				bbaslik("Siparişler","Sitede Yer Alan Tüm Üyeler");
 				$siparis = ksorgu("content","where type='SİPARİŞ' GROUP BY style ORDER BY id DESC");
@@ -1181,6 +1297,14 @@ $i = get("i");
 														 <div class="col-md-6">
  															Fiyat: 
  															<input type="number" required step="any" class="form-control" name="fiyat" value="<?php e($c['fiyat']) ?>" id="">
+ 														</div>
+														 <div class="col-md-6">
+														 	6-11 Yaş Fiyat: 
+ 															<input type="number" required step="any" class="form-control" name="fiyat2" value="<?php e($c['fiyat2']) ?>" id="">
+ 														</div>
+														 <div class="col-md-6">
+															2-5 Yaş Fiyat: 
+ 															<input type="number" required step="any" class="form-control" name="fiyat3" value="<?php e($c['fiyat3']) ?>" id="">
  														</div>
 														 <?php } ?>
 														<div class="col-md-12">

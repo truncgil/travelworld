@@ -1,0 +1,10 @@
+<?php 
+include("admin.inc.php");
+include("admin.core.php");
+include("admin.lock.php");
+p_ust("Hoşgeldiniz");
+	p_header();
+	p_side();
+	p_main();
+p_alt();
+ ?>
