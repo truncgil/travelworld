@@ -186,7 +186,7 @@
 										</form>
                                     </div>
                                 </div>
-                                <div class="d-none d-lg-block col-lg-2 t-center">
+                                <div class="d-none t-center">
                                     <a href="./" class="wh-full">
                                         <img class="w-75p h-auto" src="assets/images/turia.png" alt="Turia">
                                     </a>

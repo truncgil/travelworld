@@ -1,13 +1,6 @@
 <?php 
-//tüm other değişkenlerini cache almaya yarar tek seferde sorguyu çok boyutlu diziye alıp işi bitiriyoruz
-$other = ksorgu("other","ORDER BY id DESC");
-$other_array = array();
-while($o = kd($other)) {
-	$other_array[$o['cid']][$o['alan']] = $o['deger'];
-}
+
 //sil("content","slug IS NULL AND type <>'SEPET'");
-
-
 if(getisset("dil")) {
 	if(!getesit("dil","tr")) {
 	$dil = veri(get("dil"));
@@ -19,13 +12,6 @@ if(getisset("dil")) {
 		oturum("dil","tr");
 	}
 	
-}
-
-function yasConverter($type) {
-	$type2 = "Yetişkin";
-	if($type=="cocuk") $type2 = "6-11 Yaş Çocuk";
-	if($type=="bebek") $type2 = "2-5 Yaş Çocuk";
-	return $type2;
 }
 function tur_item($t) {
 	$indirim = cokr($t['slug'], 'İndirim');
@@ -807,34 +793,23 @@ function isHTML($string){
 	 
 	 
  } ?>
- <?php 
-	
-	function cok($id,$key) { //content other key echo
-	   global $other_array;
-	   // $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
-	   // e($kim['deger']);
-	   e($other_array[$id][$key]);
-	} 
-	?>
-	<?php function cokd($id,$key) { //content other key echo
-		global $other_array;
-		$key = trim($key);
-		$kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
-		return $kim;
-	   //return $other_array[$id][$key];
-	} ?>
-	<?php function cok2($id,$key) { //content other key echo
-		global $other_array;
-		//$kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
-		//e2($kim['deger']);
-		e2($other_array[$id][$key]);
-	} ?>
-	<?php function cokr($id,$key) { //content other key return
-		global $other_array;
-	   // $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
-	   // return $kim['deger'];
-		return $other_array[$id][$key];
-	} ?>
+ <?php function cok($id,$key) { //content other key echo
+	 $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
+	 e($kim['deger']);
+ } ?>
+ <?php function cokd($id,$key) { //content other key echo
+	 $key = trim($key);
+	 $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
+	 return $kim;
+ } ?>
+ <?php function cok2($id,$key) { //content other key echo
+	 $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
+	 e2($kim['deger']);
+ } ?>
+ <?php function cokr($id,$key) { //content other key return
+	 $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
+	 return $kim['deger'];
+ } ?>
  <?php function cokr2($id,$key) { //content other key return
 	 $kim = kd(ksorgu("other","WHERE cid = '$id' AND alan='$key'"));
 	 return $kim;

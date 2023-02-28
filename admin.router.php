@@ -13,6 +13,7 @@ $i = get("i");
 				bbaslik("Gelen Ödemeler", "Gelen ödemeleri bu bölümden takip edebilirsiniz. ");
 				$bas = 0;
 				$miktar = 100;
+<<<<<<< HEAD
 				$filtre = "";
 				$where = [];
 			
@@ -50,6 +51,10 @@ $i = get("i");
 				 </form>
 				 <?php _col2() ?>
 				 <?php col2("col-md-12") ?>
+=======
+				$sorgu = ksorgu("odemeler","order by id desc limit $bas,$miktar");
+				 ?>
+>>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
 				 <div class="table-responsive">
 					<table class="table table-bordered table-hover table-striped">
 						<tr>
@@ -121,7 +126,10 @@ $i = get("i");
 						 <?php } ?>
 					</table>
 				 </div>
+<<<<<<< HEAD
 				 <?php _col2() ?>
+=======
+>>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
 				 
 				 <?php 
 				break;
@@ -1299,11 +1307,19 @@ $i = get("i");
  															<input type="number" required step="any" class="form-control" name="fiyat" value="<?php e($c['fiyat']) ?>" id="">
  														</div>
 														 <div class="col-md-6">
+<<<<<<< HEAD
 														 	6-11 Yaş Fiyat: 
  															<input type="number" required step="any" class="form-control" name="fiyat2" value="<?php e($c['fiyat2']) ?>" id="">
  														</div>
 														 <div class="col-md-6">
 															2-5 Yaş Fiyat: 
+=======
+														 	7-15 Yaş Fiyat: 
+ 															<input type="number" required step="any" class="form-control" name="fiyat2" value="<?php e($c['fiyat2']) ?>" id="">
+ 														</div>
+														 <div class="col-md-6">
+															0-6 Yaş Fiyat: 
+>>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
  															<input type="number" required step="any" class="form-control" name="fiyat3" value="<?php e($c['fiyat3']) ?>" id="">
  														</div>
 														 <?php } ?>
