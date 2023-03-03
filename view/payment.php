@@ -53,12 +53,8 @@ $toplam += $ara_toplam;
 							 </table>
 								<?php if(getesit("step","2"))  { 
 								  ?>		
-<<<<<<< HEAD
  							<div class="btn btn-success btn-block odeme-yap" style="position: relative;
     z-index: 1000000000;" onclick="$('.send').trigger('click');">Ödeme Yap</div> 
-=======
- 							<div class="btn btn-success btn-block odeme-yap" onclick="$('.send').trigger('click');">Ödeme Yap</div> 
->>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
 								 <?php } ?>
 										
 							 <?php 
