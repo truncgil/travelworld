@@ -20,11 +20,17 @@
 							 ?>
 							 <table class="table">
 <?php 
-$ara_toplam = $t['fiyat'] * post("yetiskin");
+if(postesit("yetiskin",1)) {
+	$yetiskinFiyat = $t['fiyat_tek'];
+} else {
+	$yetiskinFiyat = $t['fiyat'];
+
+}
+$ara_toplam = $yetiskinFiyat * post("yetiskin");
 $toplam += $ara_toplam;
 ?>
 									<tr>
-										<td><?php echo post("yetiskin") ?> x Yetişkin (<?php e(para($t['fiyat'])) ?>) </td>
+										<td><?php echo post("yetiskin") ?> x Yetişkin (<?php e(para($yetiskinFiyat)) ?>) </td>
 										<td><?php e(para($ara_toplam)) ?></td>
 									</tr> 
 									<?php if(!postesit("cocuk",0))  { 
@@ -69,7 +75,7 @@ $toplam += $ara_toplam;
 							<div class="row">
 								<div class="col-md-4">
 									<p>Yetişkin Sayısı</p>
-									<input type="number" name="yetiskin" required value="1" min="1" id="" class="form-control">
+									<input type="number" name="yetiskin" required value="2" min="1" id="" class="form-control">
 								</div>
 								<div class="col-md-4">
 									<p><?php e(yasConverter("cocuk")) ?> Sayısı</p>

@@ -2,7 +2,7 @@
 			data-image="assets/images/1600x1200-12.jpg"
 			data-width="1600" data-height="1200">
 			<div class="page_title_wrapper">
-				<h1>İletişim</h1>
+				<h1><?php e2("İletişim") ?></h1>
 			</div>
 			<div class="parallax_overlay_header"></div>
 		</div>
@@ -33,7 +33,7 @@
 								
 								
 							?>
-							<h2 class="ppb_title"><span class="renk-1"><?php e($fstr); ?></span> <span class="renk-2"><?php e($sstr); ?></span></h2>
+							<h2 class="ppb_title d-none"><span class="renk-1"><?php e($fstr); ?></span> <span class="renk-2"><?php e($sstr); ?></span></h2>
 
 						</div>
 						<div class="icerik">
@@ -111,26 +111,26 @@ if(getisset("ekle")) {
 
  ?>
 
-                                        <h3 class="w-full t-center">Sizi Arayalım</h3>
+                                        <h3 class="w-full t-center"><?php e2("Sizi Arayalım") ?></h3>
                                         <form action="?ekle" method="POST">
                                             <div class="form-group">
-                                                <label for="ad">Adınız</label>
+                                                <label for="ad"><?php e2("Adınız") ?></label>
                                                 <input type="text" name="ad" id="ad" class="form-control" placeholder="Adınız ve Soyadınız">
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">E-Mail</label>
+                                                <label for="email"><?php e2("E-Mail") ?></label>
                                                 <input type="email" name="email" id="email" class="form-control" placeholder="E-Mail Adresiniz">
                                             </div>
                                             <div class="form-group">
-                                                <label for="telefon">Telefon</label>
+                                                <label for="telefon"><?php e2("Telefon") ?></label>
                                                 <input type="tel" name="telefon" id="telefon" class="form-control" placeholder="Telefon Numaranız">
                                             </div>
                                             <div class="form-group">
-                                                <label for="mesaj">Mesajınız</label>
+                                                <label for="mesaj"><?php e2("Mesajınız") ?></label>
                                                 <textarea name="mesaj" id="mesaj" class="form-control" placeholder="İletmek istediğiniz mesaj"></textarea>
                                             </div>
                                             <div class="f-right">
-                                                <button type="submit" class="btn btn-primary">Gönder</button>
+                                                <button type="submit" class="btn btn-primary"><?php e2("Gönder") ?></button>
                                             </div>
                                         </form>
                                     </div>

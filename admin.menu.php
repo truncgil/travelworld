@@ -31,9 +31,33 @@
 
 										<li>
 											<a href="?i=sayfa&s=tur" aria-expanded="true">
-												<span class="glyphicon fa fa-language" aria-hidden="true"></span>
+												<span class="glyphicon fa fa-send" aria-hidden="true"></span>
 												<span class="sidebar-nav-item">Turlar</span>
 											</a>
+										</li>
+										<li>
+											<a href="#" aria-expanded="true">
+												<span class="glyphicon fa fa-language" aria-hidden="true"></span>
+												<span class="sidebar-nav-item">Çeviriler</span>
+												<span class="fa arrow"></span>
+											</a>
+											<ul aria-expanded="true" class="collapse">
+												<li>
+													<a href="?i=ceviri_tablo"><i class="glyphicon fa fa-language"></i> Çeviri Tablosu</a>
+												</li>
+												<li>
+													<a href="?i=yeniDil"><i class="glyphicon fa fa-plus"></i> Yeni Dil Ekle</a>
+												</li>
+												<?php $diller = ksorgu("diller");
+												while($d = kd($diller)) {
+												?>
+												<li>
+													<a href="?i=dil&d=<?php e($d['kisa']) ?>"><span class="glyphicon flag-icon flag-icon-<?php e($d['kisa']) ?>"></span><?php e($d['isim']) ?> </a>
+													<a href="?dilSil=<?php e($d['id']) ?>" class="sag-buton" teyit="<?php e($d['isim']) ?> dilini kaldırmak istediğinizden emin misiniz" ><i class="fa fa-trash"></i></a>
+												</li>
+												<?php } ?>
+												
+											</ul>
 										</li>
 
 										<li>

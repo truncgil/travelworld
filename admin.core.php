@@ -224,51 +224,51 @@ if(getisset("cogalt")) {
 	}
 }
 if(getisset("dilSil")) {
-	$id = veri(get("dilSil"));
-	sil("diller","id=$id");
+    $id = veri(get("dilSil"));
+    sil("diller","id=$id");
 }
 if(getisset("yeniDilEkle")){
-	
-	$kisa = explode("-",post("kisa"));
-	$kisa = $kisa[5];
-	$_POST['kisa'] = $kisa;
-	$dil = veri(post("kisa"));
-	$kelimeler = ksorgu("translate","GROUP BY i");
-	while($k = kd($kelimeler)) {
-		$i = veri($k['i']);
-		
-		$varmi = ksorgu("translate","WHERE i=$i AND dil=$dil");
-		if($varmi==0) {
-		dEkle("translate",array(
-			"i" => $k['i'],
-			"dil" => post("kisa")
-		));
-		}
-	}
-	$varmi = ksorgu("diller","WHERE kisa=$dil");
-	if($varmi==0) {
-	dEkle("diller",$_POST);
-	print_r($_POST);
-	}
-	geri("i=ceviri_tablo");
+
+    $kisa = explode("-",post("kisa"));
+    $kisa = $kisa[5];
+    $_POST['kisa'] = $kisa;
+    $dil = veri(post("kisa"));
+    $kelimeler = ksorgu("translate","GROUP BY i");
+    while($k = kd($kelimeler)) {
+        $i = veri($k['i']);
+
+        $varmi = ksorgu("translate","WHERE i=$i AND dil=$dil");
+        if($varmi==0) {
+        dEkle("translate",array(
+            "i" => $k['i'],
+            "dil" => post("kisa")
+        ));
+        }
+    }
+    $varmi = ksorgu("diller","WHERE kisa=$dil");
+    if($varmi==0) {
+    dEkle("diller",$_POST);
+    print_r($_POST);
+    }
+    geri("i=ceviri_tablo");
 }
 if(getisset("kelimeDetayGuncelle")) {
-	$diller = ksorgu("diller");
-	////$k = post("k");
-	
-	$_POST['k'] = urlencode(post("k"));
-	while($d = kd($diller)) {
-		$id = veri(post("id-".$d['kisa']));
-		dGuncelle("translate",array(
-			"dil" => $d['kisa'],
-			"t" => post($d['kisa'])
-		),"id = $id");
-		e("ok ");
-	}
-	ob_start();
-	geri("i=kelimeDetay&k={$_POST['k']}");
-	print_r($_POST);
-	exit();
+    $diller = ksorgu("diller");
+    ////$k = post("k");
+
+    $_POST['k'] = urlencode(post("k"));
+    while($d = kd($diller)) {
+        $id = veri(post("id-".$d['kisa']));
+        dGuncelle("translate",array(
+            "dil" => $d['kisa'],
+            "t" => post($d['kisa'])
+        ),"id = $id");
+        e("ok ");
+    }
+    ob_start();
+    geri("i=kelimeDetay&k={$_POST['k']}");
+    print_r($_POST);
+    exit();
 }
 if(getisset("ajax")) {
 	switch ($_GET['ajax']) {

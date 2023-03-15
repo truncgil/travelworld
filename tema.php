@@ -1,5 +1,7 @@
-<?php include("bd.php"); ?>
+<?php 
+include("bd.php"); ?>
 <?php function start($c="") { ?>
+	
 <!DOCTYPE html>
 <html lang="tr">
 <head>

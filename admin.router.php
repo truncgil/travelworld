@@ -13,7 +13,6 @@ $i = get("i");
 				bbaslik("Gelen Ödemeler", "Gelen ödemeleri bu bölümden takip edebilirsiniz. ");
 				$bas = 0;
 				$miktar = 100;
-<<<<<<< HEAD
 				$filtre = "";
 				$where = [];
 			
@@ -51,10 +50,6 @@ $i = get("i");
 				 </form>
 				 <?php _col2() ?>
 				 <?php col2("col-md-12") ?>
-=======
-				$sorgu = ksorgu("odemeler","order by id desc limit $bas,$miktar");
-				 ?>
->>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
 				 <div class="table-responsive">
 					<table class="table table-bordered table-hover table-striped">
 						<tr>
@@ -126,10 +121,7 @@ $i = get("i");
 						 <?php } ?>
 					</table>
 				 </div>
-<<<<<<< HEAD
 				 <?php _col2() ?>
-=======
->>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
 				 
 				 <?php 
 				break;
@@ -985,122 +977,232 @@ $i = get("i");
 			<?php
 			break;
 			case "kelimeDetay" :
-			$_GET['k'] = urldecode(get("k"));
-			$kelime = veri(kelime(strip_tags(get("k")),2));
-			bbaslik("$kelime kelimesini detaylı düzenle","Bu sayfada $kelime kelimesi için metin editörünü kullanarak diğer dillerde detaylı değişiklik yapabilirsiniz");
-			?>
-			<?php if(getisset("noEditor")) { ?>
-				<a href="?i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Metin Editörünü Kullan</a>
-			<?php } else { ?>
-				<a href="?noEditor&i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-code"></i> HTML Kod Editörünü Kullan</a>
-			<?php } ?>
-			<form action="?kelimeDetayGuncelle" method="post">
-			<input type="hidden" name="k" value="<?php e(urlencode(get("k"))); ?>" />
-			<div class="row">
+                $md5 = veri(get("k"));
+                $translate = kd(ksorgu("translate","where md5 = $md5"));
+
+                $kelime = $translate['i'];
+                bbaslik("Detail edit","On this page, you can make detailed changes in other languages using the text editor for the word.");
+                ?>
+                <?php if(getisset("noEditor")) { ?>
+                    <a href="?i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> With Text Editor</a>
+                <?php } else { ?>
+                    <a href="?noEditor&i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-code"></i> With HTML Editor</a>
+                <?php } ?>
+                <form action="?kelimeDetayGuncelle" method="post">
+                <input type="hidden" name="k" value="<?php e(get("k")); ?>" />
+                <div class="row">
+
+                </div>
+                <div class="row">
+                <?php $diller = ksorgu("diller"); ?>
+                <?php while($d= kd($diller)) {
+                    ?>
+                    <div class="col-md-6">
+                    <h4><i class="flag-icon flag-icon-<?php e($d['kisa']) ?>"></i> <?php e($d['isim']) ?></h4>
+                    <input type="hidden" name="id-<?php e($d['kisa']) ?>" value="<?php e(ti(get("k"),$d['kisa'])); ?>" />
+                    <textarea name="<?php e($d['kisa']) ?>" id="editor<?php e($d['kisa']) ?>" cols="30" rows="10" class="<?php if(getisset("noEditor")) { e("form-control"); } else { e("ckeditor"); } ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); } else e($kelime) ?></textarea>
+                    <?php if(getisset("noEditor")) { ?>
+                    <div style="border:dashed 2px #999;border-radius:10px;padding:10px;margin-top:10px;">
+                    <div class="onizle<?php e($d['kisa']) ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); }else { e(get("k")); } ?></div>
+                    <div class="clearfix"></div>
+                    </div>
+                    <?php } ?>
+                    </div>
+                    <?php
+                } ?>
+                </div>
+                <?php if(getisset("noEditor")) { ?>
+                        <script>
+                        $(function(){
+                        <?php $diller = ksorgu("diller"); ?>
+                        <?php while($d = kd($diller)) { ?>
+                        var editor<?php e($d['kisa']) ?> = CodeMirror.fromTextArea(document.getElementById("editor<?php e($d['kisa']) ?>"), {
+                            lineNumbers: true
+                        });
+                        editor<?php e($d['kisa']) ?>.on("keydown", function(e){
+                            $(".onizle<?php e($d['kisa']) ?>").html(e.getValue());
+                        });
+                        <?php } ?>
+                        });
+                        </script>
+                    <?php } ?>
+                <div class="row">
+                    <div class=" col-md-12">
+                        <button class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                </form>
+            <?php
+            break;
+			case "kelimeDetay" :
+				$md5 = veri(get("k"));
+				$translate = kd(ksorgu("translate","where md5 = $md5"));
 			
-			</div>
-			<div class="row">
-			<?php $diller = ksorgu("diller"); ?>
-			<?php while($d= kd($diller)) {
+				$kelime = $translate['i'];
+				bbaslik("Detail edit","On this page, you can make detailed changes in other languages using the text editor for the word.");
 				?>
-				<div class="col-md-6">
-				<h4><i class="flag-icon flag-icon-<?php e($d['kisa']) ?>"></i> <?php e($d['isim']) ?></h4>
-				<input type="hidden" name="id-<?php e($d['kisa']) ?>" value="<?php e(ti(get("k"),$d['kisa'])); ?>" />
-				<textarea name="<?php e($d['kisa']) ?>" id="editor<?php e($d['kisa']) ?>" cols="30" rows="10" class="<?php if(getisset("noEditor")) { e("form-control"); } else { e("ckeditor"); } ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); }else { e(get("k")); } ?></textarea>
 				<?php if(getisset("noEditor")) { ?>
-				<div style="border:dashed 2px #999;border-radius:10px;padding:10px;margin-top:10px;">
-				<div class="onizle<?php e($d['kisa']) ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); }else { e(get("k")); } ?></div>
-				<div class="clearfix"></div>
-				</div>
+					<a href="?i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> With Text Editor</a>
+				<?php } else { ?>
+					<a href="?noEditor&i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-code"></i> With HTML Editor</a>
 				<?php } ?>
+				<form action="?kelimeDetayGuncelle" method="post">
+				<input type="hidden" name="k" value="<?php e(get("k")); ?>" />
+				<div class="row">
+			
 				</div>
-				<?php
-			} ?>
-			</div>
-			<?php if(getisset("noEditor")) { ?>
-					<script>
-					$(function(){	
-					<?php $diller = ksorgu("diller"); ?>
-					<?php while($d = kd($diller)) { ?>
-					var editor<?php e($d['kisa']) ?> = CodeMirror.fromTextArea(document.getElementById("editor<?php e($d['kisa']) ?>"), {
-						lineNumbers: true
-					});
-					editor<?php e($d['kisa']) ?>.on("keydown", function(e){
-						$(".onizle<?php e($d['kisa']) ?>").html(e.getValue());
-					});
-					<?php } ?>
-					});
-					</script>
-				<?php } ?>
-			<div class="row">
-				<div class=" col-md-12">			
-					<button class="btn btn-primary">Güncelle</button>
-				</div>
-			</div>
-			</form>
-			<?php
-			break;
-			case "ceviri_tablo" : 
-			?>
-				<div class="row firstRow">
-					<div class="col-lg-9  col-md-8  col-sm-7">
-						<div class="firstRowHeader">
-							<h5><i class="fa fa-language"></i> Çeviri Tablosu</h5>
-						</div>
-						<ol class="breadcrumb">
-							<li class="active">Ana Dizin</li>
-						</ol>
-					</div>
-					<div class="col-lg-3   col-md-4  col-sm-5">
-						
-					</div>
-				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Kelime</th>
-							<?php $diller =ksorgu("diller"); ?>
-							<?php while($d = kd($diller)) {
-								e("<th><i class='flag-icon flag-icon-{$d['kisa']}'></i> {$d['isim']}</th>");
-							} ?>
-							<th>İşlem</th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php $translate = ksorgu("translate","WHERE TRIM(i) IS NOT NULL AND TRIM(i)<>'' GROUP BY i ORDER BY i ASC"); ?>
-					<?php while($t = kd($translate)) {
-					
+				<div class="row">
+				<?php $diller = ksorgu("diller"); ?>
+				<?php while($d= kd($diller)) {
 					?>
-					<?php 
-							//if(!isHTML($t['i'])) {						
-							?>
-						<tr id="id-<?php e($t['id']); ?>">
-							<td title="<?php e(strip_tags($t['i'])); ?>">
-							
-						
-							
-							<?php e(kelime(strip_tags($t['i']),3)); ?>
-							</td>
-							<?php $diller =ksorgu("diller"); ?>
-							<?php while($d = kd($diller)) { ?>
-							<td>
-							<?php if(!isHTML(tv($t['i'],$d['kisa']))) { ?>
-							<textarea name="" class="form-control iduzenle" tablo="translate" s_alan="id" s_kriter="<?php e(ti($t['i'],$d['kisa'])); ?>" d_alan="t" cols="30" rows="1"><?php e(strip_tags(tv($t['i'],$d['kisa']),"<p>")); ?></textarea>
-							<?php } ?>
-							</td>
-							<?php } ?>
-							<td>
-								<a href="?&id=<?php e($t['id']); ?>&kelimeSil=<?php e(urlencode(strip_tags($t['i']))) ?>" teyit="<?php e(kelime(strip_tags($t['i']),10)) ?> çevirisini silmek istediğinizden emin misiniz?" ajax="#id-<?php e($t['id']) ?>" class="btn btn-primary"><i class="fa fa-trash"></i></a>
-								<a href="?i=kelimeDetay&k=<?php e(urlencode($t['i'])) ?>" title="Detaylı Düzenle" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-								
-							</td>
-						</tr>
-						<?php // } ?>
+					<div class="col-md-6">
+					<h4><i class="flag-icon flag-icon-<?php e($d['kisa']) ?>"></i> <?php e($d['isim']) ?></h4>
+					<input type="hidden" name="id-<?php e($d['kisa']) ?>" value="<?php e(ti(get("k"),$d['kisa'])); ?>" />
+					<textarea name="<?php e($d['kisa']) ?>" id="editor<?php e($d['kisa']) ?>" cols="30" rows="10" class="<?php if(getisset("noEditor")) { e("form-control"); } else { e("ckeditor"); } ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); } else e($kelime) ?></textarea>
+					<?php if(getisset("noEditor")) { ?>
+					<div style="border:dashed 2px #999;border-radius:10px;padding:10px;margin-top:10px;">
+					<div class="onizle<?php e($d['kisa']) ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); }else { e(get("k")); } ?></div>
+					<div class="clearfix"></div>
+					</div>
 					<?php } ?>
-					</tbody>
-				</table>
+					</div>
+					<?php
+				} ?>
+				</div>
+				<?php if(getisset("noEditor")) { ?>
+						<script>
+						$(function(){
+						<?php $diller = ksorgu("diller"); ?>
+						<?php while($d = kd($diller)) { ?>
+						var editor<?php e($d['kisa']) ?> = CodeMirror.fromTextArea(document.getElementById("editor<?php e($d['kisa']) ?>"), {
+							lineNumbers: true
+						});
+						editor<?php e($d['kisa']) ?>.on("keydown", function(e){
+							$(".onizle<?php e($d['kisa']) ?>").html(e.getValue());
+						});
+						<?php } ?>
+						});
+						</script>
+					<?php } ?>
+				<div class="row">
+					<div class=" col-md-12">
+						<button class="btn btn-primary">Update</button>
+					</div>
+				</div>
+				</form>
 			<?php
 			break;
+			case "ceviri_tablo" :
+				?>
+					<div class="row firstRow">
+						<div class="col-lg-9  col-md-8  col-sm-7">
+							<div class="firstRowHeader">
+								<h5><i class="fa fa-language"></i>Translate Table</h5>
+							</div>
+							<ol class="breadcrumb">
+								<li class="active">Main</li>
+							</ol>
+						</div>
+						<div class="col-lg-3   col-md-4  col-sm-5">
+			
+						</div>
+					</div>
+			
+					<form action="" method="get">
+						<input type="hidden" name="i" value="ceviri_tablo">
+						<input type="text" name="q" class="form-control" placeholder="Search..." value="<?php e(get("q")) ?>" id="">
+						<select name="yontem" id="yontem">
+							<option value="iceren">İçeren</option>
+							<option value="baslayan">Başlayan</option>
+							<option value="biten">Biten</option>
+							<option value="tam_ifade">Tam İfade</option>
+						</select>
+						<script>
+			$(function(){
+			$("#yontem").val("<?php e(get("yontem")) ?>");
+			});
+			
+						</script>
+						<button class="btn btn-primary">Ara</button>
+					</form>
+					<input type="number" name="" onchange="location.href='?i=ceviri_tablo&q=<?php e(get("q")) ?>&s='+$(this).val()" id="">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Word</th>
+								<?php $diller =ksorgu("diller"); ?>
+								<?php while($d = kd($diller)) {
+									e("<th><i class='flag-icon flag-icon-{$d['kisa']}'></i> {$d['isim']}</th>");
+								} ?>
+								<th>İşlem</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						$bas = 0;
+						$miktar = 10;
+						$q = "";
+						if(getisset("q")) {
+							if(getesit("yontem","iceren")) {
+								$q = veri("%{$_GET['q']}%");
+							}
+							if(getesit("yontem","tam_ifade")) {
+								$q = veri("{$_GET['q']}");
+							}
+							if(getesit("yontem","baslayan")) {
+								$q = veri("{$_GET['q']}%");
+							}
+							if(getesit("yontem","biten")) {
+								$q = veri("%{$_GET['q']}");
+							}
+			
+							$q = "AND (i LIKE $q OR t LIKE $q)";
+							//e($q);
+						}
+						if(getisset("s")) {
+							$miktar = 100;
+							$bas = veri(get("s"),"sayi");
+							$bas = $miktar *($bas-1);
+			
+						}
+						$md5 = veri(md5(get("q")));
+						$q = "WHERE TRIM(i) IS NOT NULL AND TRIM(i)<>'' $q OR md5 = $md5 GROUP BY i ORDER BY id DESC LIMIT $bas,$miktar";
+					//  e($q);
+						$translate = ksorgu("translate",$q); ?>
+						<?php while($t = kd($translate)) {
+			
+						?>
+						<?php
+								//if(!isHTML($t['i'])) {                        
+								?>
+							<tr id="id-<?php e($t['id']); ?>">
+								<td title="<?php e(strip_tags($t['i'])); ?>" style="max-width: 500px;">
+			
+								<textarea disabled style="width: 500px; height: 60px;"><?php e(str_replace(array('<', '>'), array('&lt;', '&gt;'), $t['i'])); ?></textarea>
+			
+			
+								<?php //e(kelime(strip_tags($t['i']),3)); ?>
+								</td>
+								<?php $diller =ksorgu("diller"); ?>
+								<?php while($d = kd($diller)) { ?>
+								<td>
+								<?php if(!isHTML(tv($t['md5'],$d['kisa']))) { ?>
+								<textarea style="width: 100%; height: 30px; max-width: 500px;" name="" class="form-control iduzenle" tablo="translate" s_alan="id" s_kriter="<?php e(ti($t['md5'],$d['kisa'])); ?>" d_alan="t" cols="30" rows="1"><?php e(strip_tags(tv($t['md5'],$d['kisa']),"<p>")); ?></textarea>
+								<?php } ?>
+								</td>
+								<?php } ?>
+								<td>
+									<a href="?&id=<?php e($t['id']); ?>&kelimeSil=<?php e(urlencode(strip_tags($t['i']))) ?>" teyit="<?php e(kelime(strip_tags($t['i']),10)) ?> çevirisini silmek istediğinizden emin misiniz?" ajax="#id-<?php e($t['id']) ?>" class="btn btn-primary"><i class="fa fa-trash"></i></a>
+									<a href="?i=kelimeDetay&k=<?php e(md5($t['i'])) ?>" title="Detaylı Düzenle" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+			
+								</td>
+							</tr>
+							<?php // } ?>
+						<?php } ?>
+						</tbody>
+					</table>
+				<?php
+				break;
 			case "dosya" : 
 				?>
 				
@@ -1296,7 +1398,7 @@ $i = get("i");
 															<input type="file" name="pic" class="form-control" />
 															
 														</div>
-														<?php if(strpos($c['tkid'],"'tur'"))  { 
+														<?php if($c['type']=="Tur")  { 
 														  ?>
  														<div class="col-md-6">
  															Tur Tarihi: 
@@ -1307,20 +1409,16 @@ $i = get("i");
  															<input type="number" required step="any" class="form-control" name="fiyat" value="<?php e($c['fiyat']) ?>" id="">
  														</div>
 														 <div class="col-md-6">
-<<<<<<< HEAD
 														 	6-11 Yaş Fiyat: 
  															<input type="number" required step="any" class="form-control" name="fiyat2" value="<?php e($c['fiyat2']) ?>" id="">
  														</div>
 														 <div class="col-md-6">
 															2-5 Yaş Fiyat: 
-=======
-														 	7-15 Yaş Fiyat: 
- 															<input type="number" required step="any" class="form-control" name="fiyat2" value="<?php e($c['fiyat2']) ?>" id="">
+ 															<input type="number" required step="any" class="form-control" name="fiyat3" value="<?php e($c['fiyat3']) ?>" id="">
  														</div>
 														 <div class="col-md-6">
-															0-6 Yaş Fiyat: 
->>>>>>> 471f3a5b6633138b73310d10957bbf1bdfc4c2ae
- 															<input type="number" required step="any" class="form-control" name="fiyat3" value="<?php e($c['fiyat3']) ?>" id="">
+															Tek Kişilik Fiyat: 
+ 															<input type="number" required step="any" class="form-control" name="fiyat_tek" value="<?php e($c['fiyat_tek']) ?>" id="">
  														</div>
 														 <?php } ?>
 														<div class="col-md-12">

@@ -1,6 +1,5 @@
 <?php 
 include("tema.php");
-//print_r($_GET);
 oturumAc();
 if(oturumisset("uid")) {
 	$uid = oturum("uid");

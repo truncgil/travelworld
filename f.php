@@ -622,71 +622,75 @@ if (stristr($u,'http') || (count(explode('.',$u)) > 1)) {
 }
  ?>
  <?php function e2($deger,$r="") {
-	global $_SESSION;
-	oturumAc();
-	if(oturumisset("dil")) { //dil seçimi yapılmışsa
-		$dil = veri(oturum("dil")); // dil hangisi
-		$i = veri($deger);
-		//verilen ifade ilgili dilde var mı 
-		if(!oturumesit("dil","tr")) {
-		$translate = ksorgu("translate","WHERE i=$i AND dil = $dil");
-		if($translate!=0) {
-			$t = kd($translate);
-			//print_r($t);
-			if($t['t']!="") { //verilen ifadenin çevirisi yapılmış mı?
-			if($r=="") {
-				echo $t['t'];
-			} else {
-				return $t['t'];
-			}
-			} else {	
-			if($r=="") {
-				echo $deger;	
-			} else {
-				return $deger;
-			}
-			}
-		} else { //verilen ifade yoksa çevirisini dil sayısına göre oluştur.
-			$diller = ksorgu("diller");
-			while($d=kd($diller)) {
-				$dil = veri($d['kisa']);
-				
-				$varmi = ksorgu("translate","WHERE i=$i AND dil = $dil");
-				//print_r($varmi);
-				if($varmi==0) {
-					//$deger = cl_http($deger);
-					if(trim($deger)!="") {
-						if(isHTML($deger)) {
-							//$deger = strip_tags($deger);
-						}
-						dEkle("translate",array(
-							"dil" => $d['kisa'],
-							"i" => "$deger"
-						));
-					}
-				}
-			}
-			if($r=="") {
-				echo $deger;	
-			} else {
-				return $deger;
-			}
-		}
-		
-	} else {
-		if($r=="") {
-				echo $deger;	
-			} else {
-				return $deger;
-			}
-	}
-	} else {
-		if($r=="") {
-			echo $deger;	
-		} else {
-			return $deger;
-		}
-	} //oi 
+    oturumAc();
+    global $translate;
+    //$translate = $_SESSION['translate'];
+    if(oturumisset("dil")) { //dil seçimi yapılmışsa
+        $i2 = md5($deger);
+        $dil2 = oturum("dil");
+        $dil = veri(oturum("dil")); // dil hangisi
+        $i = veri($deger);
+        //verilen ifade ilgili dilde var mı
+        //if(!oturumesit("dil","tr")) {
+    //  e($i2);
+        if(isset($translate[$i2][$dil2])) {
+            $t = $translate[$i2][$dil2];
+            if($t!="") { //verilen ifadenin çevirisi yapılmış mı?
+                if($r=="") {
+                    echo $t;
+                } else {
+                    return $t;
+                }
+            } else {
+                if($r=="") {
+                    echo $deger;
+                } else {
+                    return $deger;
+                }
+            }
+        } else {
+            if($dil2!="") {
+                if(trim($deger)!="") {
+                    if(!in_array(md5($deger.$dil2),$var)) {
+                        //$diller = ksorgu("diller");
+                    //  echo "$dil2 $deger eklenecek";
+                        dEkle("translate",array(
+                            "dil" => $dil2,
+                            "md5" => md5($deger),
+                            "i" => "$deger"
+                        ));
+                        /*
+                        while($d=kd($diller)) {
+                            $dil = veri($d['kisa']);
+                            dEkle("translate",array(
+                                "dil" => $d['kisa'],
+                                "md5" => md5($deger),
+                                "i" => "$deger"
+                            ));
+
+                        }
+                        */
+                    }
+                }
+
+
+            }
+            if($r=="") {
+                echo $deger;
+            } else {
+                return $deger;
+            }
+        }
+
+
+
+    } else {
+        if($r=="") {
+            echo $deger;
+        } else {
+            return $deger;
+        }
+    } //oi
 } //f ?>
 
 <?php function r($img,$size="1024",$dir="file") { 
@@ -892,29 +896,21 @@ function isHTML($string){
 	"json" => $json
 	),"slug = '$slug'");
  } ?>
- <?php function tv($ifade,$dil) {
-	 if(trim($ifade)!="") {
-	 $i = veri($ifade);
-	 $varmi = ksorgu("translate","WHERE i = $i AND dil = '$dil'");
-	 if($varmi!=0) { //buldun mu
-		$trans = kd($varmi);
-		 return $trans['t'];
-	 } else { 
-		 $ifade = kelime($ifade,5); //bulamadıysan cümleyi kısalt öyle bir ara
-		 $i = veri("%$ifade%");
-		// e($i);
-		 $varmi = ksorgu("translate","WHERE i LIKE $i AND dil = '$dil'");
-		 if($varmi!=0) { //bulduysan çıktıla
-			 return $trans['t'];
-		 } 
-	 }
-	 }
-	
+  <?php function tv($ifade,$dil) {
+     if(trim($ifade)!="") {
+     $i = veri($ifade);
+     $varmi = ksorgu("translate","WHERE (md5 = $i) AND dil = '$dil' limit 1");
+         if($varmi!=0) { //buldun mu
+            $trans = kd($varmi);
+             return $trans['t'];
+         }
+     }
  } ?>
  <?php function ti($ifade,$dil) {
-	 $i = veri($ifade);
-	 $trans = kd(ksorgu("translate","WHERE i = $i AND dil = '$dil'"));
-	 return $trans['id'];
+    //echo $ifade . $dil;
+     $i = veri($ifade);
+     $trans = kd(ksorgu("translate","WHERE md5 = $i AND dil = '$dil' limit 1"));
+     return $trans['id'];
  } ?>
 <?php 
 function google($title,$start=0) {

@@ -1,25 +1,18 @@
   <?php 
   
   $ara = ksorgu("content","where kid='{$c['slug']}' AND y=1 ORDER BY s"); ?>
-  <div id="page_caption" class="hasbg parallax" data-image="<?php r($c['pic'],1920) ?>" data-width="1600"
-      data-height="1200">
-      <div class="page_title_wrapper">
-          <h1><?php e($c['title']) ?></h1>
-          <div id="crumbs"><a href="./">Anasayfa</a> / <a href="turlar">Turlar</a> / <span
-                  class="current"><?php e($c['title']) ?></span>
-          </div>
-      </div>
-      <div class="parallax_overlay_header"></div>
-  </div>
+  
+
   
   <!-- Begin content -->
-  <div id="page_content_wrapper" class="hasbg fullwidth">
+  <div id="page_content_wrapper" style="margin-top:100px;" class="fullwidth">
 
       <div class="page_title_wrapper pt-0 w-100 t-center">
           
 		  
 		  <section class="default-section" style="padding-top: 20px !important;">
 			<div class="container">
+				<h1><?php e2($c['title']) ?></h1>
 				<div class="row" style="width: 100%;">
 				<?php 
 				while($t = kd($ara)){

@@ -1,22 +1,15 @@
-<div id="page_caption" class="hasbg parallax"
-			data-image="<?php r($c['pic'],1920) ?>"
-			data-width="1600" data-height="1200">
-			<div class="page_title_wrapper">
-				<h1><?php e($c['title']) ?></h1>
-			</div>
-			<div class="parallax_overlay_header"></div>
-		</div>
+
 		
 		<?php
 		$custom_bg = '';
-		$page_content_wrapper_margin = '';
+		$page_content_wrapper_margin = 'style="margin-top: -400px !important;"';
 		if($c['slug'] == 'ucak-bileti' || $c['slug'] == 'otel'){
 			$custom_bg = 'style="background-image: url(file/'.$c['pic'].'); background-size: cover; background-repeat: no-repeat;"';
-			$page_content_wrapper_margin = 'style="margin-top: 100px !important;"';
+			$page_content_wrapper_margin = 'style="margin-top: 0px !important;"';
 		}
 		?>
 		<!-- Begin content -->
-		<div id="page_content_wrapper" class="hasbg" <?php echo $page_content_wrapper_margin; ?>>
+		<div id="page_content_wrapper" <?php echo $page_content_wrapper_margin; ?>>
             <div class="page_title_wrapper w-100 t-center">
 				
 			<div class="inner">
