@@ -3,7 +3,7 @@ include("bd.php"); ?>
 <?php function start($c="") { ?>
 	
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="<?php wl() ?>">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -137,13 +137,13 @@ include("bd.php"); ?>
 													}
 												?>
                                                 <a href="http://turia.com.tr/router.php?id=arac-kiralama" class="nav-link" <?php if(! isMobile()) { if($alt!=0) { ?>id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
-                                                 <?php e($m['title']) ?><?php if($alt!=0) { ?><i class="fa fa-chevron-down mleft-5"></i> <?php } } ?> 
+                                                 <?php e2($m['title']) ?><?php if($alt!=0) { ?><i class="fa fa-chevron-down mleft-5"></i> <?php } } ?> 
                                                 </a>
 												<?php if($alt!=0 && $m['slug'] != 'hac-umre') { ?>
 														<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
 														<?php while($a = kd($alt)) { ?>
 
-															<a href="http://turia.com.tr/router.php?id=arac-kiralama" class="dropdown-item"><?php e($a['title']) ?></a>
+															<a href="http://turia.com.tr/router.php?id=arac-kiralama" class="dropdown-item"><?php e2($a['title']) ?></a>
 														<?php } ?>
 														</div>
 												<?php } ?>
@@ -164,19 +164,41 @@ include("bd.php"); ?>
 													}
 												?>
                                                 <a href="<?php e($link); ?>" class="nav-link" <?php if($alt!=0) { ?>id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
-                                                   <?php e($m['title']) ?><?php if($alt != 0){ ?><i class="fa fa-chevron-down mleft-5"></i><?php } ?>
+                                                   <?php e2($m['title']) ?><?php if($alt != 0){ ?><i class="fa fa-chevron-down mleft-5"></i><?php } ?>
                                                 </a>
 												<?php if($alt!=0 && $m['slug'] != 'hac-umre') { ?>
 														<div class="dropdown-menu" aria-labelledby="navbarDropdown1">
 														<?php while($a = kd($alt)) { ?>
 
-															<a href="<?php e($a['slug']) ?>" class="dropdown-item"><?php e($a['title']) ?></a>
+															<a href="<?php e($a['slug']) ?>" class="dropdown-item"><?php e2($a['title']) ?></a>
 														<?php } ?>
 														</div>
 												<?php } ?>
                                             </li>
                                             <!-- /Dropdown Link -->
 											<?php } } ?>
+											<li class="nav-item dropdown">
+<?php $selectedLang = oturum("dil");
+if($selectedLang=="tr") $selectedLang = "Türkçe";
+if($selectedLang=="gb") $selectedLang = "English";
+if($selectedLang=="ru") $selectedLang = "Русский";
+if($selectedLang=="sa") $selectedLang = "عربي";
+ ?>
+                                                <a href="#" class="nav-link" <?php if(! isMobile()) { ?>id="navbarDropdown1" role="button" aria-haspopup="true" aria-expanded="false"<?php } ?>>
+                                                <?php e($selectedLang) ?><i class="fa fa-chevron-down mleft-5"></i>
+                                                </a>
+
+                                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+
+
+                                                            <a href="?dil=tr" class="dropdown-item"><?php e2("Türkçe") ?></a>
+                                                            <a href="?dil=gb" class="dropdown-item"><?php e2("English") ?></a>
+                                                            <a href="?dil=ru" class="dropdown-item"><?php e2("Русский") ?></a>
+                                                            <a href="?dil=sa" class="dropdown-item"><?php e2("عربي") ?></a>
+
+                                                        </div>
+
+                                            </li>
                                         </ul>
 										<form method="GET" action="ara" class="form-inline d-none">
 											<div class="w-auto h-auto m-0-auto">
@@ -269,7 +291,7 @@ include("bd.php"); ?>
 					<ul>
 					<?php $turlar = ksorgu("content","where kid='turlar' AND y=1 ORDER BY RAND() DESC limit 5"); while($t = kd($turlar)) { ?>
 						<li>
-							<a href="<?php e($t['slug']) ?>"><?php e($t['title']) ?></a>
+							<a href="<?php e($t['slug']) ?>"><?php e2($t['title']) ?></a>
 						</li>
 					<?php } ?>
 					

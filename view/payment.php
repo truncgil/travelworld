@@ -30,7 +30,7 @@ $ara_toplam = $yetiskinFiyat * post("yetiskin");
 $toplam += $ara_toplam;
 ?>
 									<tr>
-										<td><?php echo post("yetiskin") ?> x Yetişkin (<?php e(para($yetiskinFiyat)) ?>) </td>
+										<td><?php echo post("yetiskin") ?> x <?php e2("Yetişkin") ?> (<?php e(para($yetiskinFiyat)) ?>) </td>
 										<td><?php e(para($ara_toplam)) ?></td>
 									</tr> 
 									<?php if(!postesit("cocuk",0))  { 
@@ -38,7 +38,7 @@ $toplam += $ara_toplam;
 										$toplam += $ara_toplam;
 									  ?>
  									<tr>
- 										<td><?php echo post("cocuk") ?> x <?php e(yasConverter("cocuk")) ?> (<?php e(para($t['fiyat2'])) ?>)</td>
+ 										<td><?php echo post("cocuk") ?> x <?php e2(yasConverter("cocuk")) ?> (<?php e(para($t['fiyat2'])) ?>)</td>
  										<td><?php e(para($ara_toplam)) ?></td>
  									</tr>  
 									 <?php } ?>
@@ -47,12 +47,12 @@ $toplam += $ara_toplam;
 										$toplam += $ara_toplam;
 									   ?>
  									<tr>
- 										<td><?php echo post("bebek") ?> x <?php e(yasConverter("bebek")) ?> (<?php e(para($t['fiyat3'])) ?>)</td>
+ 										<td><?php echo post("bebek") ?> x <?php e2(yasConverter("bebek")) ?> (<?php e(para($t['fiyat3'])) ?>)</td>
  										<td><?php e(para($ara_toplam)) ?></td>
  									</tr>  
 									  <?php } ?>
 									<tr>
-										<td>Toplam</td>
+										<td><?php e2("Toplam") ?></td>
 										<td><?php e(para($toplam)) ?></td>
 									</tr>
 									
@@ -60,7 +60,7 @@ $toplam += $ara_toplam;
 								<?php if(getesit("step","2"))  { 
 								  ?>		
  							<div class="btn btn-success btn-block odeme-yap" style="position: relative;
-    z-index: 1000000000;" onclick="$('.send').trigger('click');">Ödeme Yap</div> 
+    z-index: 1000000000;" onclick="$('.send').trigger('click');"><?php e2("Ödeme Yap") ?></div> 
 								 <?php } ?>
 										
 							 <?php 
@@ -74,31 +74,31 @@ $toplam += $ara_toplam;
 						<form action="?t=<?php e(get("t")) ?>&step=2" method="post">
 							<div class="row">
 								<div class="col-md-4">
-									<p>Yetişkin Sayısı</p>
+									<p><?php e2("Yetişkin Sayısı") ?></p>
 									<input type="number" name="yetiskin" required value="2" min="1" id="" class="form-control">
 								</div>
 								<div class="col-md-4">
-									<p><?php e(yasConverter("cocuk")) ?> Sayısı</p>
+									<p><?php e2(yasConverter("cocuk")) ?> <?php e2("Sayısı") ?></p>
 									<input type="number" name="cocuk" value="0" min="0" id="" class="form-control">
 								</div>
 								<div class="col-md-4">
-									<p><?php e(yasConverter("bebek")) ?> Sayısı</p>
+									<p><?php e2(yasConverter("bebek")) ?> <?php e2("Sayısı") ?></p>
 									<input type="number" name="bebek" value="0" min="0" id="" class="form-control">
 								</div>
 								<div class="col-md-6">
-									Telefon Numaranız
+									<?php e2("Telefon Numaranız") ?>
 									<input type="number" name="telefon" required class="form-control" required id="">
 								</div>
 								<div class="col-md-6">
-									E-Posta Adresiniz
+									<?php e2("E-Posta Adresiniz") ?>
 									<input type="text" name="email" required class="form-control" required id="">
 								</div>
 								<div class="col-md-12">
-									Adresiniz
+									<?php e2("Adresiniz") ?>
 									<textarea name="adres" id="" required cols="30" rows="10" class="form-control"></textarea>
 								</div>
 								<div class="col-12">
-									<button class="btn btn-primary mt-5">İlerle</button>
+									<button class="btn btn-primary mt-5"><?php e2("İlerle") ?></button>
 								</div>
 							</div>
 						</form> 

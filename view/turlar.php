@@ -69,27 +69,27 @@ asdsad
 											
 											
 											</div>
-										<?php } elseif(cokr($t['slug'], 'Fırsat Yazısı') != '' && !empty(cokr($t['slug'], 'Fırsat Yazısı'))){
+										<?php } elseif(cokr2($t['slug'], 'Fırsat Yazısı') != '' && !empty(cokr2($t['slug'], 'Fırsat Yazısı'))){
 										?>
 											
 											<div class="tarih-band" style="font-size: 0.8rem;">
 											
 											
 												
-												<span style="font-weight: bold; color: #fff;"><?php cok($t['slug'], 'Fırsat Yazısı'); ?></span>
+												<span style="font-weight: bold; color: #fff;"><?php cok2($t['slug'], 'Fırsat Yazısı'); ?></span>
 											
 											
 											</div>
 											
 										<?php
 										} ?>
-										<img class="dis-none" src="<?php r($t['pic'],512) ?>" alt="<?php e($t['title']) ?>">
+										<img class="dis-none" src="<?php r($t['pic'],512) ?>" alt="<?php e2($t['title']) ?>">
 									</div>
 								</a>
 								<div class="content">
 									<div class="row" style="width: 100%;">
 										<div class="col-8 col-xs-8">
-											<div class="country <?php if($i % 3 == 1) echo 'pl-5-turs'; ?>" ><?php e($t['title']) ?></div>
+											<div class="country <?php if($i % 3 == 1) echo 'pl-5-turs'; ?>" ><?php e2($t['title']) ?></div>
 											<div class="col-12 col-xs-12" style="text-align: justify; font-size: .8rem; font-style: italic; padding: 0 !important;">
 											<?php cok($t['slug'], 'Tarih'); ?>
 											</div>
@@ -101,7 +101,7 @@ asdsad
 													foreach($satir AS $s) {
 														if(trim($s)!="") {		
 														?>
-															<i class="fa fa-map-marker"></i><?php e(trim($s)) ?><br>
+															<i class="fa fa-map-marker"></i><?php e2(trim($s)) ?><br>
 														<?php } ?>
 													<?php } ?>
 												</div>

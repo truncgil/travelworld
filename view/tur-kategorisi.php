@@ -32,7 +32,7 @@
 						if($firsat!="") {
 						?>
 						<div class="tour_sale">
-							<div class="tour_sale_text"><?php e($firsat) ?></div>
+							<div class="tour_sale_text"><?php e2($firsat) ?></div>
 						</div>
 						<?php } ?>
 						<div class="thumb_title">
@@ -51,7 +51,7 @@
 							foreach($satir AS $s) {
 								if(trim($s)!="") {		
 								?>
-									<i class="fa fa-map-marker"></i><?php e(trim($s)) ?><br>
+									<i class="fa fa-map-marker"></i><?php e2(trim($s)) ?><br>
 								<?php } ?>
 							<?php } ?>
 						</div>

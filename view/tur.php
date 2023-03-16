@@ -63,7 +63,7 @@
 						</div>
 						<?php } ?>
 						<div class="icerik">
-                           <?php e($c['html']) ?>
+                           <?php e2($c['html']) ?>
                         </div>
 					</div>
 				</div>

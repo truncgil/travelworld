@@ -7,6 +7,7 @@ while($o = kd($other)) {
 }
 //sil("content","slug IS NULL AND type <>'SEPET'");
 
+oturumAc();
 
 if(getisset("dil")) {
 	if(!getesit("dil","tr")) {
@@ -19,6 +20,9 @@ if(getisset("dil")) {
 		oturum("dil","tr");
 	}
 	
+}
+if(!oturumisset("dil")) {
+	oturum("dil","tr");
 }
 
 function yasConverter($type) {
@@ -554,7 +558,7 @@ if($begendimmi==0) {$begen=0;} else {$begen=1;}
  <?php function meta($c=array()) {
 	 if(isset($c['slug'])) {
 		 $link = "/{$c['slug']}.html";
-		 $title=$c['title'];
+		 $title= e2($c['title'],1);
 		 $content = substr(strip_tags($c['html']),0,180);
 		 if($c['pic']!="") {
 			$img = "/file/" . $c['pic'] ;
@@ -577,7 +581,7 @@ if($begendimmi==0) {$begen=0;} else {$begen=1;}
 		 $keywords = set("Anahtar Kelimeler",1);
 	 }
 	 ?>
-	 <title><?php if(isset($c['title'])) e($c['title']); else set("Başlık"); ?></title>
+	 <title><?php if(isset($c['title'])) e2($c['title']); else set("Başlık"); ?></title>
 
 		<!-- Meta -->
 		<meta charset="utf-8">
@@ -621,7 +625,24 @@ if (stristr($u,'http') || (count(explode('.',$u)) > 1)) {
   return implode(' ',$U);
 }
  ?>
- <?php function e2($deger,$r="") {
+ <?php 
+ $translate_sorgu = ksorgu("translate");
+ $translate = array();
+ $var = array();
+ while($t = kd($translate_sorgu)) {
+	// if($t['t']=="") $t['t'] = 0;
+	array_push($var,$t['md5'].$t['dil']);
+	if($t['t']!="") {
+	 
+		 $translate[$t['md5']][$t['dil']] = $t['t'];
+	 
+	} else {
+ //	print2($t); exit();
+	 //	$translate[$t['md5']][$t['dil']] = $t['i'];
+	}
+	 
+ }
+ function e2($deger,$r="") {
     oturumAc();
     global $translate;
     //$translate = $_SESSION['translate'];
