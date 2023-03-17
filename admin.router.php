@@ -976,64 +976,7 @@ $i = get("i");
 				</div>
 			<?php
 			break;
-			case "kelimeDetay" :
-                $md5 = veri(get("k"));
-                $translate = kd(ksorgu("translate","where md5 = $md5"));
-
-                $kelime = $translate['i'];
-                bbaslik("Detail edit","On this page, you can make detailed changes in other languages using the text editor for the word.");
-                ?>
-                <?php if(getisset("noEditor")) { ?>
-                    <a href="?i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> With Text Editor</a>
-                <?php } else { ?>
-                    <a href="?noEditor&i=kelimeDetay&k=<?php e(urlencode($_GET['k'])) ?>" class="btn btn-primary"><i class="fa fa-code"></i> With HTML Editor</a>
-                <?php } ?>
-                <form action="?kelimeDetayGuncelle" method="post">
-                <input type="hidden" name="k" value="<?php e(get("k")); ?>" />
-                <div class="row">
-
-                </div>
-                <div class="row">
-                <?php $diller = ksorgu("diller"); ?>
-                <?php while($d= kd($diller)) {
-                    ?>
-                    <div class="col-md-6">
-                    <h4><i class="flag-icon flag-icon-<?php e($d['kisa']) ?>"></i> <?php e($d['isim']) ?></h4>
-                    <input type="hidden" name="id-<?php e($d['kisa']) ?>" value="<?php e(ti(get("k"),$d['kisa'])); ?>" />
-                    <textarea name="<?php e($d['kisa']) ?>" id="editor<?php e($d['kisa']) ?>" cols="30" rows="10" class="<?php if(getisset("noEditor")) { e("form-control"); } else { e("ckeditor"); } ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); } else e($kelime) ?></textarea>
-                    <?php if(getisset("noEditor")) { ?>
-                    <div style="border:dashed 2px #999;border-radius:10px;padding:10px;margin-top:10px;">
-                    <div class="onizle<?php e($d['kisa']) ?>"><?php if(tv(get("k"),$d['kisa'])!="") { e(tv(get("k"),$d['kisa'])); }else { e(get("k")); } ?></div>
-                    <div class="clearfix"></div>
-                    </div>
-                    <?php } ?>
-                    </div>
-                    <?php
-                } ?>
-                </div>
-                <?php if(getisset("noEditor")) { ?>
-                        <script>
-                        $(function(){
-                        <?php $diller = ksorgu("diller"); ?>
-                        <?php while($d = kd($diller)) { ?>
-                        var editor<?php e($d['kisa']) ?> = CodeMirror.fromTextArea(document.getElementById("editor<?php e($d['kisa']) ?>"), {
-                            lineNumbers: true
-                        });
-                        editor<?php e($d['kisa']) ?>.on("keydown", function(e){
-                            $(".onizle<?php e($d['kisa']) ?>").html(e.getValue());
-                        });
-                        <?php } ?>
-                        });
-                        </script>
-                    <?php } ?>
-                <div class="row">
-                    <div class=" col-md-12">
-                        <button class="btn btn-primary">Update</button>
-                    </div>
-                </div>
-                </form>
-            <?php
-            break;
+			
 			case "kelimeDetay" :
 				$md5 = veri(get("k"));
 				$translate = kd(ksorgu("translate","where md5 = $md5"));

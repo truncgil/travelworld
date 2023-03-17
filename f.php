@@ -642,9 +642,11 @@ if (stristr($u,'http') || (count(explode('.',$u)) > 1)) {
 	}
 	 
  }
+ //print_r($var); exit();
  function e2($deger,$r="") {
     oturumAc();
     global $translate;
+    global $var;
     //$translate = $_SESSION['translate'];
     if(oturumisset("dil")) { //dil seçimi yapılmışsa
         $i2 = md5($deger);
@@ -672,7 +674,7 @@ if (stristr($u,'http') || (count(explode('.',$u)) > 1)) {
         } else {
             if($dil2!="") {
                 if(trim($deger)!="") {
-                    if(!in_array(md5($deger.$dil2),$var)) {
+                    if(!in_array(md5($deger).$dil2,$var)) {
                         //$diller = ksorgu("diller");
                     //  echo "$dil2 $deger eklenecek";
                         dEkle("translate",array(
@@ -917,7 +919,7 @@ function isHTML($string){
 	"json" => $json
 	),"slug = '$slug'");
  } ?>
-  <?php function tv($ifade,$dil) {
+ <?php function tv($ifade,$dil) {
      if(trim($ifade)!="") {
      $i = veri($ifade);
      $varmi = ksorgu("translate","WHERE (md5 = $i) AND dil = '$dil' limit 1");
@@ -928,10 +930,22 @@ function isHTML($string){
      }
  } ?>
  <?php function ti($ifade,$dil) {
-    //echo $ifade . $dil;
      $i = veri($ifade);
-     $trans = kd(ksorgu("translate","WHERE md5 = $i AND dil = '$dil' limit 1"));
-     return $trans['id'];
+	 $q = "WHERE md5 = $i AND dil = '$dil' limit 1";
+	 $sorgu = ksorgu("translate",$q);
+	 if($sorgu==0) {
+
+		$id = dEkle("translate", array(
+			'md5' => $ifade,
+			'dil' => $dil
+		));
+	 } else {
+		$trans = kd($sorgu);
+		$id = $trans['id'];
+	 }
+     
+
+     return $id;
  } ?>
 <?php 
 function google($title,$start=0) {

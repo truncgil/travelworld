@@ -223,6 +223,7 @@ if(getisset("cogalt")) {
 		geri("i=icerikler");
 	}
 }
+
 if(getisset("dilSil")) {
     $id = veri(get("dilSil"));
     sil("diller","id=$id");
