@@ -46,7 +46,7 @@ if( $post['status'] == 'success' ) { ## Ödeme Onaylandı
     dGuncelle("odemeler",[
         'datals' => 'Ödeme Yapıldı'
     ],"slug={$post['merchant_oid']}");
-    $sorgu = kd(ksorgu("odemeler","slug = '{$post['merchant_oid']}'"));
+    $sorgu = kd(ksorgu("odemeler","where slug = '{$post['merchant_oid']}'"));
     $j = json_decode($sorgu['html'], true);
     $text = "Sayın {$j['adi']} {$j['soyadi']}, ödemeniz başarıyla alınmıştır. En kısa zamanda bilgilendirileceksiniz.";
     mailGonder($j['email'],"Ödemeniz başarıyla alınmıştır", $text);
