@@ -71,10 +71,10 @@
     $timeout_limit = "30";
 
     ## Hata mesajlarının ekrana basılması için entegrasyon ve test sürecinde 1 olarak bırakın. Daha sonra 0 yapabilirsiniz.
-    $debug_on = 1;
+    $debug_on = 0;
 
     ## Mağaza canlı modda iken test işlem yapmak için 1 olarak gönderilebilir.
-    $test_mode = 1;
+    $test_mode = 0;
 
     $no_installment = 0; // Taksit yapılmasını istemiyorsanız, sadece tek çekim sunacaksanız 1 yapın
 
