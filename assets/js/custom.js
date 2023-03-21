@@ -659,13 +659,6 @@ jQuery(document).ready(function () {
 		});
 	}
 
-	jQuery('#wrapper').waypoint(function (direction) {
-		jQuery('#post_more_wrapper').toggleClass('hiding', direction === "up");
-	}, {
-		offset: function () {
-			return jQuery.waypoints('viewportHeight') - jQuery(this).height() + 100;
-		}
-	});
 
 	jQuery('.animated').imagesLoaded(function () {
 		jQuery(this).waypoint(function (direction) {

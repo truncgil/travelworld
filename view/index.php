@@ -2,13 +2,18 @@
 		<!-- Slider -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+		
 
 		<?php if(isMobile()) { ?>
-			<div class="owl-carousel" style="margin-top:62px;">
+			<div class="owl-carousel owl-theme" style="margin-top:62px;">
 			<?php $slider = contents("mobile-slider");
 			while($s = kd($slider)) {
 				?>
-				<img src="<?php r($s['pic'],512) ?>" alt="<?php e($s['title']) ?>">
+				<a href="<?php cok($s['slug'],"link") ?>">
+
+				<img data-src="<?php r($s['pic'],512) ?>" class="owl-lazy" alt="<?php e($s['title']) ?>">
+				</a>
 				<?php 
 			}
 			?>
@@ -17,16 +22,19 @@
 				$(function(){
 					$(".owl-carousel").owlCarousel({
 						items : 1,
+						lazyLoad: true,
 						loop: true
 					});
 				});
 			</script>
 		<?php } else { ?>
-			<div class="owl-carousel" style="margin-top:62px;">
+			<div class="owl-carousel owl-theme" style="margin-top:62px;">
 			<?php $slider = contents("slider");
 			while($s = kd($slider)) {
 				?>
-				<img src="<?php r($s['pic'],1920) ?>" alt="<?php e($s['title']) ?>">
+				<a href="<?php cok($s['slug'],"link") ?>">
+					<img data-src="<?php r($s['pic'],1920) ?>" class="owl-lazy" alt="<?php e($s['title']) ?>">
+				</a>
 				<?php 
 			}
 			?>
@@ -35,7 +43,13 @@
 				$(function(){
 					$(".owl-carousel").owlCarousel({
 						items : 1,
-						loop: true
+						loop: true,
+						dots: true,
+						//nav: true,
+						autoplay:true,
+						lazyLoad: true,
+						autoplayTimeout:3000,
+						autoplayHoverPause:false
 					});
 				});
 			</script>
