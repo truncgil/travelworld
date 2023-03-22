@@ -56,36 +56,15 @@
 		
 		<?php } ?>
 
-		<div class="ppb_wrapper  ">
-			<div class="one pp_tour_search d-none">
+		<div class="ppb_wrapper">
+			<div class="  mb-5 ">
 				<div class="page_content_wrapper">
-					<form id="tour_search_form" name="tour_search_form" method="get"
+					<form id="" name="" method="get"
 						action="ara">
-						<div class="tour_search_wrapper">
-							<div class="one_fourth">
-								<label for="keyword">Gidiş Yeri</label>
-								<input id="keyword" name="q" type="text" placeholder="Şehir, bölge veya anahtar kelime">
-							</div>
-							<div class="one_fourth">
-								<label for="start_date">Tarih</label>
-								<div class="start_date_input">
-									<input id="start_date" name="start_date" type="text" placeholder="Gidiş">
-									<input id="start_date_raw" name="start_date_raw" type="hidden">
-									<i class="fa fa-calendar"></i>
-								</div>
-								<div class="end_date_input">
-									<input id="end_date" name="end_date" type="text" placeholder="Dönüş">
-									<input id="end_date_raw" name="end_date_raw" type="hidden">
-									<i class="fa fa-calendar"></i>
-								</div>
-							</div>
-							<div class="one_fourth">
-								<label for="budget">Maks Bütçe</label>
-								<input id="budget" name="budget" type="text" placeholder="TL Örn. 200">
-							</div>
-							<div class="one_fourth last">
-								<input id="tour_search_btn" type="submit" value="Ara">
-							</div>
+						<label for="keyword"><?php e2("Gidiş Yeri") ?></label>
+						<div class="input-group">
+							<input id="keyword" class="form-control" name="q" type="text" placeholder="<?php e2("Şehir, bölge veya anahtar kelime") ?>">
+							<button class="btn btn-primary"><i class="fa fa-search"></i></button>
 						</div>
 					</form>
 				</div>
