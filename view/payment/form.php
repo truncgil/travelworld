@@ -1,6 +1,28 @@
+<?php 
+switch ($type) {
+    case 'yetiskin':
+            $min = "-11 years";
+            $max = "-120 years";
+        break;
+    case 'cocuk':
+            $min = "-6 years";
+            $max = "-11 years";
+        break;
+    case 'bebek':
+            $min = "0 years";
+            $max = "-5 years";
+        break;
+    
+    default:
+        # code...
+        break;
+}
+$min = date("Y-m-d",strtotime($min));
+$max = date("Y-m-d",strtotime($max));
+?>
 <div class="col-md-3">
     Doğum Tarihi
-    <input type="date" name="<?php e($type) ?>_<?php e($k) ?>_dog_tar" class="form-control" required id="">
+    <input type="date" name="<?php e($type) ?>_<?php e($k) ?>_dog_tar" min="<?php e($max) ?>" max="<?php e($min) ?>" class="form-control" required id="">
 </div>
 <div class="col-md-3">
     İsim
