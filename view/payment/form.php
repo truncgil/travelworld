@@ -34,5 +34,5 @@ $max = date("Y-m-d",strtotime($max));
 </div>
 <div class="col-md-3">
     TC Kimlik No:
-    <input type="number" min="11" max="11" name="<?php e($type) ?>_<?php e($k) ?>_tckimlik" class="form-control" required id="">
+    <input type="number" name="<?php e($type) ?>_<?php e($k) ?>_tckimlik" class="form-control tckimlik" required id="">
 </div>
