@@ -13,12 +13,13 @@
             <div class="page_title_wrapper w-100 t-center">
 				
 			<div class="inner">
+				<h1><?php e2($c['title']) ?></h1>
 				<!-- Begin main content -->
 				<div class="inner_wrapper">
 				<div class="card mx-auto" 
 				<?php if(isMobile())  { 
 				  ?>
- 				style="margin-top:50px;" 
+ 				style="margin-top:365px;" 
 				 <?php } else {
 					 ?>
 					 style="margin-top:550px;" 

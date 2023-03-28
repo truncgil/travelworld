@@ -102,7 +102,7 @@ include("bd.php"); ?>
         <div class="container-fluid">
             <div class="row">
                 
-                    <nav class="navbar navbar-expand-lg navbar-light col-12 col-md-12 ">
+                    <nav class="navbar navbar-expand-lg fixed-top navbar-light col-12 col-md-12 bg-white">
                         
                                 <div class="col-6 col-lg-2">
                                     <a href="./" class="navbar-brand wh-full">
