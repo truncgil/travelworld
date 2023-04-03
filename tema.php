@@ -359,6 +359,16 @@ if($selectedLang=="sa") $selectedLang = "عربي";
 	<script type="text/javascript" src="assets/js/jquery.flexslider-min.js"></script>
 
 	<script type="text/javascript" src="assets/js/odometer.min.js"></script>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y46H3XXD78">
+	</script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-Y46H3XXD78');
+	</script>
 
 </body>
 
