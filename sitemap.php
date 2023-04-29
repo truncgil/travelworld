@@ -11,7 +11,7 @@ $url = "https://gezidunyasi.com.tr"."/";
 		$tip = veri(get("t"));
 		$tip = "AND type=$tip";
 	} else {
-		$tip ="";
+		$tip ="AND type IN('Tur', 'Tur Kategorisi', 'Sayfa', 'Menü', 'Diğer')";
 	} 
 	$content = ksorgu("content","where slug IS NOT NULL $tip AND y=1");
 	?>

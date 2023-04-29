@@ -47,6 +47,7 @@ include("bd.php"); ?>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js"></script>
 	<script type="text/javascript" src="assets/js/custom2.js"></script>
 	<script type="text/javascript" src="assets/js/custom.js"></script>
+	<meta name="google-site-verification" content="_rOZ85IeY9-9yHWDFnPopjWE5JVfajAM1Bi9KhfP0D4" />
 	<style>
 		body {
 		-webkit-user-select: none;

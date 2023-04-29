@@ -1332,7 +1332,7 @@ global $breadcrumb2;
 	$content = ksorgu("content","WHERE y=1 AND id='$id' $where");
 	return $content;
 } ?>
-<?php function contents($slug="",$where="",$limit="0,100") {
+<?php function contents($slug="",$where="",$limit="0,100000") {
 	if($slug=="") {
 		$content = ksorgu("content","WHERE y=1 AND kid IS NULL $where ORDER BY s ASC LIMIT $limit");
 	} else {
